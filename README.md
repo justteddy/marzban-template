@@ -1,69 +1,11 @@
-<h3 align="center">Marzbanify Template</h3>
-
-<p align="center">
-  Simple, beautiful, and user-friendly HTML template for <a href="https://github.com/Gozargah/Marzban">Marzban</a> subscription page
-  <br>
-  <a href="https://denisromanov.ru/projects/marzbanify-template-demo"><strong>Live demo »</strong></a>
-  <br>
-  <br>
-  <a href="https://github.com/dermv/marzbanify-template/tree/main#features">Features</a>
-  ·
-  <a href="https://github.com/dermv/marzbanify-template/tree/main#mini-version">mini Version</a>
-  ·
-  <a href="https://github.com/dermv/marzbanify-template/tree/main#install">Install</a>
-  ·
-  <a href="https://github.com/dermv/marzbanify-template/tree/main#personalization">Personalization</a>
-</p>
-
-<p>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./.github/assets/dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="./.github/assets/light.png">
-    <img alt="Marzbanify Template" src="./.github/assets/dark.png">
-  </picture>
-</p>
-
-
-## Features
-
-- Clean and intuitive design with minimal code
-- System, light, and dark theme modes
-- Multi-language support: English, Russian, Chinese, Persian
-- Step-by-step guides for PC, Android, and iOS
-- Automatic detection of user preferences: theme, language, and device
-
-
-## mini Version
-Pure minimalism. Just the header and step-by-step guide.
-<br>
-<a href="https://denisromanov.ru/projects/marzbanify-template-mini-demo">Live demo »</a>
-
-<details>
-  <summary>Preview</summary>
-  <p>
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="./.github/assets/mini/dark.png">
-      <source media="(prefers-color-scheme: light)" srcset="./.github/assets/mini/light.png">
-      <img alt="Marzbanify Template mini" src="./.github/assets/mini/dark.png">
-    </picture>
-  </p>
-</details>
-
-
 ## Install
 
 ### 1. Upload the template file to the server
 
 Choose the version and run the corresponding command.
 
-**Main version:**
 ```
-sudo wget -O /var/lib/marzban/templates/subscription/index.html https://raw.githubusercontent.com/dermv/marzbanify-template/main/index.html
-```
-
-**Mini version:**
-```
-sudo wget -O /var/lib/marzban/templates/subscription/index.html https://raw.githubusercontent.com/dermv/marzbanify-template/main/mini/index.html
+sudo wget -O /var/lib/marzban/templates/subscription/index.html https://raw.githubusercontent.com/justteddy/marzban-template/index.html
 ```
 
 ### 2. Configure the subscription page path
