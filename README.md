@@ -5,7 +5,7 @@
 Choose the version and run the corresponding command.
 
 ```
-sudo wget -O /var/lib/marzban/templates/subscription/index.html https://raw.githubusercontent.com/justteddy/marzban-template/index.html
+sudo wget -O /var/lib/marzban/templates/subscription/index.html https://raw.githubusercontent.com/justteddy/marzban-template/refs/heads/main/index.html
 ```
 
 ### 2. Configure the subscription page path
