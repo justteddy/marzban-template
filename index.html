@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{{ user.username }} - Информация о подписке</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -45,7 +46,9 @@
 <div class="container">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h5 class="card-title mb-3">Данные пользователя {{ user.username }}</h5>
+            <h5 class="card-title mb-3">
+                Данные пользователя {{ user.username }}
+            </h5>
             <p><strong>Статус:</strong>
                 <span id="user-status-badge" class="badge">Загрузка...</span>
             </p>
@@ -173,7 +176,7 @@
                                     v2rayN (рекомендуется)
                                     <div>
                                         <a href="https://github.com/2dust/v2rayN/releases" target="_blank" class="btn btn-sm btn-outline-secondary me-2">Загрузить (GitHub)</a>
-                                        <button onclick="copyToClipboard('{{ user.subscription_url }}', this)" class="btn btn-sm btn-primary">Копировать ссылку</button>
+                                        <button onclick="copyToClipboard(fullUrl, this)" class="btn btn-sm btn-primary">Копировать ссылку</button>
                                         <small class="d-block text-muted">Вставьте ссылку в программу</small>
                                     </div>
                                 </li>
@@ -181,7 +184,7 @@
                                     NekoRay
                                     <div>
                                         <a href="https://github.com/MatsuriDayo/nekoray/releases" target="_blank" class="btn btn-sm btn-outline-secondary me-2">Загрузить (GitHub)</a>
-                                        <button onclick="copyToClipboard('{{ user.subscription_url }}', this)" class="btn btn-sm btn-primary">Копировать ссылку</button>
+                                        <button onclick="copyToClipboard(fullUrl, this)" class="btn btn-sm btn-primary">Копировать ссылку</button>
                                         <small class="d-block text-muted">Вставьте ссылку в программу</small>
                                     </div>
                                 </li>
@@ -212,7 +215,7 @@
                                     NekoRay
                                     <div>
                                         <a href="https://github.com/MatsuriDayo/nekoray/releases" target="_blank" class="btn btn-sm btn-outline-secondary me-2">Загрузить (GitHub)</a>
-                                        <button onclick="copyToClipboard('{{ user.subscription_url }}', this)" class="btn btn-sm btn-primary">Копировать ссылку</button>
+                                        <button onclick="copyToClipboard(fullUrl, this)" class="btn btn-sm btn-primary">Копировать ссылку</button>
                                         <small class="d-block text-muted">Вставьте ссылку в программу</small>
                                     </div>
                                 </li>
@@ -220,14 +223,14 @@
                                     Clash Verge
                                     <div>
                                         <a href="https://github.com/zzzgydi/clash-verge/releases" target="_blank" class="btn btn-sm btn-outline-secondary me-2">Загрузить (GitHub)</a>
-                                        <button onclick="copyToClipboard('{{ user.subscription_url }}', this)" class="btn btn-sm btn-primary">Копировать ссылку</button> <small class="d-block text-muted">Вставьте ссылку в программу</small>
+                                        <a href="#" onclick="event.preventDefault(); window.location.href=`clash://install-config?url=${encodeURIComponent(fullUrl)}`" class="btn btn-sm btn-primary">Добавить подписку</a>
                                     </div>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Sing-Box GUI
                                     <div>
                                         <a href="https://github.com/SagerNet/sing-box/releases" target="_blank" class="btn btn-sm btn-outline-secondary me-2">Загрузить (GitHub)</a>
-                                        <button onclick="copyToClipboard('{{ user.subscription_url }}', this)" class="btn btn-sm btn-primary">Копировать ссылку</button>
+                                        <button onclick="copyToClipboard(fullUrl, this)" class="btn btn-sm btn-primary">Копировать ссылку</button>
                                         <small class="d-block text-muted">Вставьте ссылку в программу</small>
                                     </div>
                                 </li>
@@ -244,8 +247,8 @@
         <div class="card-body text-center">
             <h5 class="card-title mb-3">Ссылка подписки</h5>
             <div class="input-group mb-3">
-                <input type="text" id="subLinkInput" class="form-control" value="{{ user.subscription_url }}" readonly>
-                <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard(fullUrl, this)">Копировать</button> </div>
+                <input type="text" id="subLinkInput" class="form-control" value="" readonly> <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard(fullUrl, this)">Копировать</button>
+            </div>
             <button class="btn btn-info" type="button" data-bs-toggle="modal" data-bs-target="#qrModal">
                 Показать QR-код
             </button>
@@ -266,7 +269,9 @@
         </div>
     </div>
 
-</div> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
 <script>
@@ -274,11 +279,19 @@
     const subUrlRaw = "{{ user.subscription_url }}";
     // Формируем полную URL подписки, если она относительная
     let fullUrl = subUrlRaw;
-    if (!subUrlRaw.startsWith("http")) {
-        const baseUrl = window.location.origin;
-        const path = subUrlRaw.startsWith('/') ? subUrlRaw.substring(1) : subUrlRaw;
-        fullUrl = `${baseUrl}/${path}`;
+    try {
+        // Пытаемся создать URL, чтобы проверить валидность и получить origin
+        new URL(subUrlRaw); // Если subUrlRaw уже абсолютный, это не вызовет ошибку
+        fullUrl = subUrlRaw;
+    } catch (_) {
+        // Если subUrlRaw относительный, создаем абсолютный
+        if (!subUrlRaw.startsWith("http")) {
+            const baseUrl = window.location.origin;
+            const path = subUrlRaw.startsWith('/') ? subUrlRaw.substring(1) : subUrlRaw;
+            fullUrl = `${baseUrl}/${path}`;
+        }
     }
+
 
     const dataLimitBytes = {% if not user.data_limit %}0{% else %}{{ user.data_limit }}{% endif %}; // В байтах
     const dataUsedBytes = {{ user.used_traffic }}; // В байтах
@@ -289,74 +302,86 @@
 
     // ----- Функции -----
 
-    /**
-     * Форматирует байты в читаемый формат (KB, MB, GB).
-     * @param {number} bytes - Количество байт.
-     * @param {number} [decimals=2] - Количество знаков после запятой.
-     * @returns {string} - Отформатированная строка.
-     */
     function formatBytes(bytes, decimals = 2) {
-        if (!+bytes) return '0 Bytes'
-        // Не показываем '∞' здесь, если лимит 0, лучше показать объем использованного
-        // if (dataLimitBytes === 0) return '∞';
+        if (bytes === null || typeof bytes === 'undefined' || bytes < 0) return '0 Bytes';
+        if (bytes === 0) return '0 Bytes';
 
-        const k = 1024
-        const dm = decimals < 0 ? 0 : decimals
-        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-        const i = Math.floor(Math.log(bytes) / Math.log(k))
+        // Добавим проверку на NaN и Infinity
+        const value = parseFloat((bytes / Math.pow(k, i)).toFixed(dm));
+        if (isNaN(value) || !isFinite(value)) return '0 Bytes';
 
-        return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
+        return `${value} ${sizes[i]}`;
     }
 
-    /**
-     * Копирует текст в буфер обмена и временно меняет текст кнопки.
-     * @param {string} textToCopy - Текст для копирования.
-     * @param {HTMLElement} buttonElement - Кнопка, на которую нажали.
-     */
+
     function copyToClipboard(textToCopy, buttonElement) {
+        if (!textToCopy || !buttonElement) return;
         navigator.clipboard.writeText(textToCopy).then(() => {
             const originalText = buttonElement.innerHTML;
-            const originalClasses = buttonElement.className; // Сохраняем исходные классы
+            const originalClasses = buttonElement.className;
             buttonElement.textContent = 'Скопировано!';
-            buttonElement.className = 'btn btn-sm btn-success'; // Устанавливаем классы для успеха
+            // Заменяем классы, чтобы быть уверенными в результате
+            buttonElement.className = originalClasses.replace(/btn-(outline-secondary|primary|info)/g, 'btn-success');
+            buttonElement.disabled = true; // Блокируем кнопку на время
 
             setTimeout(() => {
                 buttonElement.innerHTML = originalText;
-                buttonElement.className = originalClasses; // Восстанавливаем исходные классы
+                buttonElement.className = originalClasses;
+                buttonElement.disabled = false; // Разблокируем кнопку
             }, 2000);
         }).catch(err => {
             console.error('Ошибка копирования: ', err);
-            alert('Не удалось скопировать ссылку.');
+            // Можно показать временное сообщение об ошибке на кнопке
+            const originalText = buttonElement.innerHTML;
+            const originalClasses = buttonElement.className;
+            buttonElement.textContent = 'Ошибка!';
+            buttonElement.className = originalClasses.replace(/btn-(outline-secondary|primary|info)/g, 'btn-danger');
+            buttonElement.disabled = true;
+            setTimeout(() => {
+                buttonElement.innerHTML = originalText;
+                buttonElement.className = originalClasses;
+                buttonElement.disabled = false;
+            }, 2000);
         });
     }
 
-    /**
-     * Устанавливает динамические ссылки для кнопок добавления подписки.
-     */
+
     function setSubscriptionLinks() {
         try {
-            // Используем try-catch на случай, если btoa() не поддерживается или fullUrl некорректен
-            const encodedFullUrlBase64 = btoa(fullUrl); // Кодируем URL в Base64 один раз
+            const encodedFullUrlBase64 = btoa(fullUrl);
+            const encodedFullUrlComponent = encodeURIComponent(fullUrl); // URL-кодированная версия
 
             // iOS
-            document.getElementById("ios-streisand-add").href = `streisand://import/${fullUrl}`;
-            document.getElementById("ios-v2box-add").href = `v2box://install-sub?url=${encodeURIComponent(fullUrl)}&name=${username}`;
-            document.getElementById("ios-singbox-add").href = `sing-box://import-remote-profile?url=${encodeURIComponent(fullUrl)}#${username}`;
-            // === НОВОЕ: Добавляем ссылки для Shadowrocket и foXray ===
-            document.getElementById("ios-shadowrocket-add").href = `sub://${encodedFullUrlBase64}`;
-            document.getElementById("ios-foxray-add").href = `foxray://yiguo.dev/sub/add/?url=${encodedFullUrlBase64}#${username}`; // Используем Base64 URL и username
-
+            safeSetHref("ios-streisand-add", `streisand://import/${fullUrl}`); // Streisand обычно хочет raw URL
+            safeSetHref("ios-v2box-add", `v2box://install-sub?url=${encodedFullUrlComponent}&name=${username}`);
+            safeSetHref("ios-singbox-add", `sing-box://import-remote-profile?url=${encodedFullUrlComponent}#${username}`);
+            safeSetHref("ios-shadowrocket-add", `sub://${encodedFullUrlBase64}`);
+            safeSetHref("ios-foxray-add", `foxray://yiguo.dev/sub/add/?url=${encodedFullUrlBase64}#${username}`);
 
             // Android
-            document.getElementById("android-v2rayng-add").href = `v2rayng://install-config?url=${encodeURIComponent(fullUrl)}`; // v2rayng обычно ожидает URL-encoded
-            document.getElementById("android-nekobox-add").href = `sn://subscription?url=${encodeURIComponent(fullUrl)}&name=${username}`;
-            document.getElementById("android-singbox-add").href = `sing-box://import-remote-profile?url=${encodeURIComponent(fullUrl)}#${username}`;
+            safeSetHref("android-v2rayng-add", `v2rayng://install-sub?url=${encodedFullUrlComponent}&name=${username}`); // v2rayng тоже может принимать name
+            safeSetHref("android-nekobox-add", `nekobox://install-sub?url=${encodedFullUrlComponent}&name=${username}`); // NekoBox тоже может принимать такой формат
+            safeSetHref("android-singbox-add", `sing-box://import-remote-profile?url=${encodedFullUrlComponent}#${username}`);
 
+            // Windows
+            safeSetHref("windows-clashverge-add", `clash://install-config?url=${encodedFullUrlComponent}`);
+            // Для v2rayN и NekoRay кнопки копирования обрабатываются через onclick="copyToClipboard(...)"
 
-            // Windows (Clash Verge использует deeplink)
-            document.getElementById("windows-clashverge-add").href = `clash://install-config?url=${encodeURIComponent(fullUrl)}`;
-            // Для других Windows клиентов (v2rayN, NekoRay) используем копирование ссылки.
+            // macOS - добавлена ссылка для Clash Verge
+            const macClashVergeLink = document.getElementById('macos-clashverge-add');
+            if (macClashVergeLink) {
+                macClashVergeLink.href = `clash://install-config?url=${encodedFullUrlComponent}`;
+                // Удаляем onclick, если он был для копирования
+                macClashVergeLink.removeAttribute('onclick');
+                // Меняем текст кнопки, если нужно
+                macClashVergeLink.textContent = 'Добавить подписку';
+            }
+
 
         } catch (error) {
             console.error("Ошибка при кодировании URL или установке ссылок:", error);
@@ -365,102 +390,112 @@
         }
     }
 
-    /**
-     * Обновляет информацию о пользователе на странице.
-     */
+    // Вспомогательная функция для безопасной установки href
+    function safeSetHref(elementId, url) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.href = url;
+        } else {
+            console.warn(`Элемент с ID "${elementId}" не найден.`);
+        }
+    }
+
+
     function updateUserInfo() {
         // Статус
         const statusBadge = document.getElementById('user-status-badge');
-        let statusText = 'Неизвестно';
-        let badgeClass = 'bg-secondary';
-        switch (userStatus) {
-            case 'active':
-                statusText = 'Активен';
-                badgeClass = 'bg-success';
-                break;
-            case 'limited':
-                statusText = 'Ограничен';
-                badgeClass = 'bg-warning text-dark';
-                break;
-            case 'expired':
-                statusText = 'Просрочен';
-                badgeClass = 'bg-danger';
-                break;
-            case 'disabled':
-                statusText = 'Отключен';
-                badgeClass = 'bg-secondary';
-                break;
+        if(statusBadge) {
+            let statusText = 'Неизвестно';
+            let badgeClass = 'bg-secondary';
+            switch (userStatus) {
+                case 'active': statusText = 'Активен'; badgeClass = 'bg-success'; break;
+                case 'limited': statusText = 'Ограничен'; badgeClass = 'bg-warning text-dark'; break;
+                case 'expired': statusText = 'Просрочен'; badgeClass = 'bg-danger'; break;
+                case 'disabled': statusText = 'Отключен'; badgeClass = 'bg-secondary'; break;
+            }
+            statusBadge.textContent = statusText;
+            statusBadge.className = `badge ${badgeClass}`;
         }
-        statusBadge.textContent = statusText;
-        statusBadge.className = `badge ${badgeClass}`; // Обновляем классы
 
         // Дата окончания
         const expireDateEl = document.getElementById('expire-date');
-        if (expireTimestamp) {
-            const date = new Date(expireTimestamp * 1000);
-            expireDateEl.textContent = date.toLocaleString('ru-RU', { dateStyle: 'long', timeStyle: 'short' });
-        } else {
-            expireDateEl.textContent = 'Бессрочно';
+        if(expireDateEl) {
+            if (expireTimestamp) {
+                const date = new Date(expireTimestamp * 1000);
+                expireDateEl.textContent = date.toLocaleString('ru-RU', { dateStyle: 'long', timeStyle: 'short' });
+            } else {
+                expireDateEl.textContent = 'Бессрочно';
+            }
         }
 
         // Информация о сбросе
         const resetInfoEl = document.getElementById('reset-info');
-        let resetText = '';
-        switch (resetStrategy) {
-            case 'day': resetText = 'Трафик сбрасывается ежедневно'; break;
-            case 'week': resetText = 'Трафик сбрасывается еженедельно'; break;
-            case 'month': resetText = 'Трафик сбрасывается ежемесячно'; break;
-            case 'year': resetText = 'Трафик сбрасывается ежегодно'; break;
-            default: resetText = 'Трафик не сбрасывается'; break;
+        if (resetInfoEl) {
+            let resetText = '';
+            switch (resetStrategy) {
+                case 'day': resetText = 'Трафик сбрасывается ежедневно'; break;
+                case 'week': resetText = 'Трафик сбрасывается еженедельно'; break;
+                case 'month': resetText = 'Трафик сбрасывается ежемесячно'; break;
+                case 'year': resetText = 'Трафик сбрасывается ежегодно'; break;
+                default: resetText = 'Трафик не сбрасывается'; break;
+            }
+            resetInfoEl.textContent = (dataLimitBytes > 0) ? resetText : 'Безлимитный тариф';
         }
-        resetInfoEl.textContent = (dataLimitBytes > 0) ? resetText : 'Безлимитный тариф';
-
 
         // Использование трафика
         const progressBar = document.getElementById('data-usage-bar');
         const trafficUsageText = document.getElementById('traffic-usage-text');
-        let usagePercent = 0;
-        let barClass = 'bg-success'; // Зеленый по умолчанию
 
-        if (dataLimitBytes > 0) {
-            // Рассчитываем процент только если есть лимит
-            usagePercent = Math.min(100, Math.round((dataUsedBytes / dataLimitBytes) * 100));
-            if (usagePercent >= 80) {
-                barClass = 'bg-danger'; // Красный > 80%
-            } else if (usagePercent >= 40) {
-                barClass = 'bg-warning text-dark'; // Желтый 40-80%
+        if (progressBar && trafficUsageText) {
+            let usagePercent = 0;
+            let barClass = 'bg-success';
+
+            const formattedUsed = formatBytes(dataUsedBytes);
+
+            if (dataLimitBytes > 0) {
+                const formattedLimit = formatBytes(dataLimitBytes);
+                usagePercent = Math.min(100, Math.max(0, Math.round((dataUsedBytes / dataLimitBytes) * 100)));
+
+                if (isNaN(usagePercent)) usagePercent = 0; // Защита от NaN
+
+                if (usagePercent >= 80) {
+                    barClass = 'bg-danger';
+                } else if (usagePercent >= 40) {
+                    barClass = 'bg-warning text-dark';
+                }
+                trafficUsageText.textContent = `Использовано: ${formattedUsed} / ${formattedLimit}`;
+                progressBar.style.width = `${usagePercent}%`;
+                progressBar.setAttribute('aria-valuenow', usagePercent);
+                progressBar.textContent = `${usagePercent}%`;
+            } else {
+                usagePercent = 0;
+                barClass = 'bg-info';
+                trafficUsageText.textContent = `Использовано: ${formattedUsed} / ∞`;
+                progressBar.style.width = `100%`;
+                progressBar.setAttribute('aria-valuenow', 0);
+                progressBar.textContent = `Безлимит`;
             }
-            trafficUsageText.textContent = `Использовано: ${formatBytes(dataUsedBytes)} / ${formatBytes(dataLimitBytes)}`;
-            progressBar.style.width = `${usagePercent}%`;
-            progressBar.setAttribute('aria-valuenow', usagePercent);
-            progressBar.textContent = `${usagePercent}%`;
-        } else {
-            // Безлимит
-            usagePercent = 0; // Прогресс не показываем как заполненный
-            barClass = 'bg-info'; // Используем синий для безлимита
-            trafficUsageText.textContent = `Использовано: ${formatBytes(dataUsedBytes)} / ∞`;
-            progressBar.style.width = `100%`; // Заполняем фон полностью
-            progressBar.setAttribute('aria-valuenow', 0); // Значение 0, т.к. лимита нет
-            progressBar.textContent = `Безлимит`; // Пишем "Безлимит"
+            progressBar.className = `progress-bar progress-bar-striped progress-bar-animated ${barClass}`;
         }
-
-        progressBar.className = `progress-bar progress-bar-striped progress-bar-animated ${barClass}`; // Обновляем классы
     }
 
-    /**
-     * Генерирует QR-код.
-     */
     function generateQrCode() {
         const qrCodeElement = document.getElementById('qrcode');
-        qrCodeElement.innerHTML = ''; // Очищаем предыдущий QR-код, если он был
+        if (!qrCodeElement) return; // Проверка наличия элемента
+        qrCodeElement.innerHTML = '';
         try {
+            if (typeof QRCode === 'undefined') {
+                console.error("Библиотека QRCode не загружена.");
+                qrCodeElement.textContent = "Ошибка: библиотека QR не загружена.";
+                return;
+            }
             new QRCode(qrCodeElement, {
-                text: fullUrl, // Используем полную URL подписки для QR
+                text: fullUrl,
                 width: 200,
                 height: 200,
                 colorDark : "#000000",
                 colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H // Высокий уровень коррекции ошибок
+                correctLevel : QRCode.CorrectLevel.H
             });
         } catch (error) {
             console.error("Ошибка генерации QR кода:", error);
@@ -470,44 +505,56 @@
 
     // ----- Выполнение при загрузке DOM -----
     document.addEventListener('DOMContentLoaded', () => {
-        updateUserInfo(); // Сначала обновляем инфо, чтобы переменные были доступны
-        setSubscriptionLinks(); // Затем устанавливаем ссылки, использующие эти переменные
-
-        // Открытие аккордеона для ОС пользователя (опционально)
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        let targetAccordionId = null;
-        if (/android/i.test(userAgent)) {
-            targetAccordionId = "#collapseAndroid";
-        } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-            targetAccordionId = "#collapseIos";
-        } else if (/Win/.test(userAgent)) {
-            targetAccordionId = "#collapseWindows";
-        } else if (/Mac/.test(userAgent)) {
-            targetAccordionId = "#collapseMacOs"; // Используем macOS секцию
-        }
-
-        if (targetAccordionId) {
-            const targetCollapseElement = document.querySelector(targetAccordionId);
-            if (targetCollapseElement && bootstrap) { // Убедимся, что bootstrap загружен
-                // Используем Bootstrap API для показа аккордеона
-                const bsCollapse = bootstrap.Collapse.getOrCreateInstance(targetCollapseElement, {
-                    toggle: false // Не переключать, если уже открыт
-                });
-                // Добавим небольшую задержку, чтобы избежать возможных проблем с отрисовкой
-                setTimeout(() => bsCollapse.show(), 100);
-            }
-        }
-
-        // Инициализация генерации QR-кода при показе модального окна
-        const qrModalElement = document.getElementById('qrModal');
-        if (qrModalElement) {
-            qrModalElement.addEventListener('shown.bs.modal', generateQrCode);
-        }
-
-        // Обновляем значение в поле ввода для копирования
+        // Обновляем значение в поле ввода для копирования СРАЗУ
         const subLinkInput = document.getElementById('subLinkInput');
         if (subLinkInput) {
             subLinkInput.value = fullUrl;
+        }
+
+        updateUserInfo();
+        setSubscriptionLinks();
+
+        // Открытие аккордеона
+        try {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            let targetAccordionId = null;
+            if (/android/i.test(userAgent)) {
+                targetAccordionId = "#collapseAndroid";
+            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                targetAccordionId = "#collapseIos";
+            } else if (/Win/.test(userAgent)) {
+                targetAccordionId = "#collapseWindows";
+            } else if (/Macintosh|MacIntel|MacPPC|Mac68K/.test(userAgent)) { // Более надежная проверка macOS
+                targetAccordionId = "#collapseMacOs";
+            }
+
+            if (targetAccordionId) {
+                const targetCollapseElement = document.querySelector(targetAccordionId);
+                // Убедимся, что Bootstrap и элемент существуют
+                if (targetCollapseElement && typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
+                    const bsCollapse = bootstrap.Collapse.getOrCreateInstance(targetCollapseElement, {
+                        toggle: false
+                    });
+                    setTimeout(() => bsCollapse.show(), 100); // Небольшая задержка
+                } else if (!targetCollapseElement) {
+                    console.warn(`Элемент аккордеона ${targetAccordionId} не найден.`);
+                } else if (typeof bootstrap === 'undefined' || !bootstrap.Collapse) {
+                    console.warn('Bootstrap Collapse API не доступен.');
+                }
+            }
+        } catch (e) {
+            console.error("Ошибка при открытии аккордеона:", e);
+        }
+
+
+        // Инициализация QR-кода
+        const qrModalElement = document.getElementById('qrModal');
+        if (qrModalElement && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+            qrModalElement.addEventListener('shown.bs.modal', generateQrCode);
+        } else if (!qrModalElement) {
+            console.warn('Модальное окно qrModal не найдено.');
+        } else {
+            console.warn('Bootstrap Modal API не доступен.');
         }
 
     });
