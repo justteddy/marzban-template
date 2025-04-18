@@ -358,15 +358,15 @@
 
             // iOS
             safeSetHref("ios-streisand-add", `streisand://import/${fullUrl}`); // Streisand обычно хочет raw URL
-            safeSetHref("ios-v2box-add", `v2box://install-sub?url=${encodedFullUrlComponent}&name=${username}`);
-            safeSetHref("ios-singbox-add", `sing-box://import-remote-profile?url=${encodedFullUrlComponent}#${username}`);
+            safeSetHref("ios-v2box-add", `v2box://install-sub?url=${encodedFullUrlComponent}&name=crabvpn`);
+            safeSetHref("ios-singbox-add", `sing-box://import-remote-profile?url=${encodedFullUrlComponent}#crabvpn`);
             safeSetHref("ios-shadowrocket-add", `sub://${encodedFullUrlBase64}`);
             safeSetHref("ios-foxray-add", `foxray://yiguo.dev/sub/add/?url=${encodedFullUrlBase64}#${username}`);
 
             // Android
-            safeSetHref("android-v2rayng-add", `v2rayng://install-sub?url=${encodedFullUrlComponent}&name=${username}`); // v2rayng тоже может принимать name
-            safeSetHref("android-nekobox-add", `nekobox://install-sub?url=${encodedFullUrlComponent}&name=${username}`); // NekoBox тоже может принимать такой формат
-            safeSetHref("android-singbox-add", `sing-box://import-remote-profile?url=${encodedFullUrlComponent}#${username}`);
+            safeSetHref("android-v2rayng-add", `v2rayng://install-sub?url=${encodedFullUrlComponent}&name=crabvpn`); // v2rayng тоже может принимать name
+            safeSetHref("android-nekobox-add", `nekobox://install-sub?url=${encodedFullUrlComponent}&name=crabvpn`); // NekoBox тоже может принимать такой формат
+            safeSetHref("android-singbox-add", `sing-box://import-remote-profile?url=${encodedFullUrlComponent}#crabvpn`);
 
             // Windows
             safeSetHref("windows-clashverge-add", `clash://install-config?url=${encodedFullUrlComponent}`);
