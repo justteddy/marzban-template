@@ -45,6 +45,17 @@
             font-weight: bold;
             color: #198754; /* Зеленый цвет для акцента */
         }
+
+        /* ---- ИЗМЕНЕНИЕ 2: Стиль для кнопок копирования ---- */
+        /* Используем btn-info для кнопок копирования, чтобы отличить их от btn-primary для добавления */
+        .btn-copy-link {
+            /* Пример: можно использовать стандартный цвет Bootstrap или задать свой */
+            /* background-color: #0dcaf0;
+            border-color: #0dcaf0;
+            color: white; */
+        }
+        /* При желании, можно добавить стили для hover/active состояния .btn-copy-link */
+
     </style>
 </head>
 <body>
@@ -86,8 +97,8 @@
                     <strong>Добавьте вашу подписку в приложение.</strong><br>
                     Рядом со ссылкой на скачивание есть кнопка для добавления подписки:
                     <ul>
-                        <li><strong>"Добавить подписку":</strong> Просто нажмите на эту кнопку. Если приложение установлено, оно должно открыться и автоматически добавить настройки.</li>
-                        <li><strong>"Копировать ссылку":</strong> Некоторые приложения не поддерживают автоматическое добавление. Нажмите эту кнопку, чтобы скопировать специальную ссылку. Затем откройте скачанное приложение и найдите в нем опцию типа "Импорт из буфера обмена", "Добавить подписку по ссылке" или "Import profile from URL" и вставьте туда скопированную ссылку.</li>
+                        <li><strong class="text-primary">"Добавить подписку"</strong> (синяя кнопка): Просто нажмите на эту кнопку. Если приложение установлено, оно должно открыться и автоматически добавить настройки.</li>
+                        <li><strong class="text-info">"Копировать ссылку"</strong> (голубая кнопка): Некоторые приложения не поддерживают автоматическое добавление. Нажмите эту кнопку, чтобы скопировать специальную ссылку. Затем откройте скачанное приложение и найдите в нем опцию типа "Импорт из буфера обмена", "Добавить подписку по ссылке" или "Import profile from URL" и вставьте туда скопированную ссылку.</li>
                     </ul>
                     Вы также можете использовать QR-код (кнопка ниже) для добавления подписки в мобильные приложения, если они поддерживают сканирование QR.
                 </li>
@@ -202,19 +213,16 @@
                                 </li>
                                 <li class="list-group-item d-flex flex-column align-items-start flex-sm-row align-items-sm-center justify-content-sm-between">
                                     <div>v2rayN</div>
-                                    <div class="mt-2 mt-sm-0 text-sm-end"> <a href="https://github.com/2dust/v2rayN/releases" target="_blank" class="btn btn-sm btn-outline-secondary me-2 mb-1 mb-sm-0">Загрузить (GitHub)</a>
-                                        <div class="d-inline-block position-relative"> <button onclick="copyToClipboard(fullUrl, this)" class="btn btn-sm btn-primary">Копировать ссылку</button>
-                                            <small class="d-block text-muted text-center text-sm-start">Вставьте ссылку в программу</small> </div>
+                                    <div class="mt-2 mt-sm-0 text-sm-end">
+                                        <a href="https://github.com/2dust/v2rayN/releases" target="_blank" class="btn btn-sm btn-outline-secondary me-2 mb-1 mb-sm-0">Загрузить (GitHub)</a>
+                                        <button onclick="copyToClipboard(fullUrl, this)" class="btn btn-sm btn-info btn-copy-link mb-1 mb-sm-0">Копировать ссылку</button>
                                     </div>
                                 </li>
                                 <li class="list-group-item d-flex flex-column align-items-start flex-sm-row align-items-sm-center justify-content-sm-between">
                                     <div>NekoRay</div>
                                     <div class="mt-2 mt-sm-0 text-sm-end">
                                         <a href="https://github.com/MatsuriDayo/nekoray/releases" target="_blank" class="btn btn-sm btn-outline-secondary me-2 mb-1 mb-sm-0">Загрузить (GitHub)</a>
-                                        <div class="d-inline-block position-relative">
-                                            <button onclick="copyToClipboard(fullUrl, this)" class="btn btn-sm btn-primary">Копировать ссылку</button>
-                                            <small class="d-block text-muted text-center text-sm-start">Вставьте ссылку в программу</small>
-                                        </div>
+                                        <button onclick="copyToClipboard(fullUrl, this)" class="btn btn-sm btn-info btn-copy-link mb-1 mb-sm-0">Копировать ссылку</button>
                                     </div>
                                 </li>
                                 <li class="list-group-item d-flex flex-column align-items-start flex-sm-row align-items-sm-center justify-content-sm-between">
@@ -238,47 +246,12 @@
                     </h2>
                     <div id="collapseMacOs" class="accordion-collapse collapse" aria-labelledby="headingMacOs" data-bs-parent="#vpnClientsAccordion">
                         <div class="accordion-body">
-                            <p class="text-muted">Для macOS вы можете использовать <span class="recommended-client">рекомендуемые</span> клиенты для iOS (если у вас Mac на Apple Silicon) или выбрать универсальные клиенты ниже.</p>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex flex-column align-items-start flex-sm-row align-items-sm-center justify-content-sm-between">
-                                    <div>NekoRay</div>
-                                    <div class="mt-2 mt-sm-0 text-sm-end">
-                                        <a href="https://github.com/MatsuriDayo/nekoray/releases" target="_blank" class="btn btn-sm btn-outline-secondary me-2 mb-1 mb-sm-0">Загрузить (GitHub)</a>
-                                        <div class="d-inline-block position-relative">
-                                            <button onclick="copyToClipboard(fullUrl, this)" class="btn btn-sm btn-primary">Копировать ссылку</button>
-                                            <small class="d-block text-muted text-center text-sm-start">Вставьте ссылку в программу</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex flex-column align-items-start flex-sm-row align-items-sm-center justify-content-sm-between">
-                                    <div>Clash Verge</div>
-                                    <div class="mt-2 mt-sm-0">
-                                        <a href="https://github.com/zzzgydi/clash-verge/releases" target="_blank" class="btn btn-sm btn-outline-secondary me-2 mb-1 mb-sm-0">Загрузить (GitHub)</a>
-                                        <a id="macos-clashverge-add" href="#" class="btn btn-sm btn-primary mb-1 mb-sm-0">Добавить подписку</a>
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex flex-column align-items-start flex-sm-row align-items-sm-center justify-content-sm-between">
-                                    <div>Sing-Box GUI</div>
-                                    <div class="mt-2 mt-sm-0 text-sm-end">
-                                        <a href="https://github.com/SagerNet/sing-box/releases" target="_blank" class="btn btn-sm btn-outline-secondary me-2 mb-1 mb-sm-0">Загрузить (GitHub)</a>
-                                        <div class="d-inline-block position-relative">
-                                            <button onclick="copyToClipboard(fullUrl, this)" class="btn btn-sm btn-primary">Копировать ссылку</button>
-                                            <small class="d-block text-muted text-center text-sm-start">Вставьте ссылку в программу</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex flex-column align-items-start flex-sm-row align-items-sm-center justify-content-sm-between">
-                                    <div>Hiddify</div>
-                                    <div class="mt-2 mt-sm-0">
-                                        <a href="https://github.com/hiddify/hiddify-next/releases" target="_blank" class="btn btn-sm btn-outline-secondary me-2 mb-1 mb-sm-0">Загрузить (GitHub)</a>
-                                        <a id="macos-hiddify-add" href="#" class="btn btn-sm btn-primary mb-1 mb-sm-0">Добавить подписку</a>
-                                    </div>
-                                </li>
-                            </ul>
+                            <p class="text-muted">
+                                Для macOS рекомендуется использовать клиенты, предназначенные для <strong>iOS</strong> (например, <span class="recommended-client">Streisand</span> или V2Box), особенно если ваш Mac работает на процессоре Apple Silicon (M1/M2/M3 и новее). Вы можете найти их в секции iOS выше.
+                            </p>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -367,8 +340,8 @@
             const originalText = buttonElement.innerHTML;
             const originalClasses = buttonElement.className;
             buttonElement.textContent = 'Скопировано!';
-            // Заменяем классы, чтобы быть уверенными в результате
-            buttonElement.className = originalClasses.replace(/btn-(outline-secondary|primary|info)/g, 'btn-success');
+            // Заменяем классы, чтобы быть уверенными в результате (учитываем и -info, и -outline-secondary)
+            buttonElement.className = originalClasses.replace(/btn-(info|outline-secondary)/g, 'btn-success');
             buttonElement.disabled = true; // Блокируем кнопку на время
 
             setTimeout(() => {
@@ -382,7 +355,7 @@
             const originalText = buttonElement.innerHTML;
             const originalClasses = buttonElement.className;
             buttonElement.textContent = 'Ошибка!';
-            buttonElement.className = originalClasses.replace(/btn-(outline-secondary|primary|info)/g, 'btn-danger');
+            buttonElement.className = originalClasses.replace(/btn-(info|outline-secondary)/g, 'btn-danger');
             buttonElement.disabled = true;
             setTimeout(() => {
                 buttonElement.innerHTML = originalText;
@@ -399,32 +372,29 @@
             const encodedFullUrlComponent = encodeURIComponent(fullUrl); // URL-кодированная версия
 
             // iOS
-            safeSetHref("ios-streisand-add", `streisand://import/${fullUrl}`); // Streisand обычно хочет raw URL
-            safeSetHref("ios-v2box-add", `v2box://install-sub?url=${encodedFullUrlComponent}&name=${username}`); // Добавил имя пользователя
+            safeSetHref("ios-streisand-add", `streisand://import/${fullUrl}`);
+            safeSetHref("ios-v2box-add", `v2box://install-sub?url=${encodedFullUrlComponent}&name=${username}`);
             safeSetHref("ios-singbox-add", `sing-box://import-remote-profile?url=${encodedFullUrlComponent}#${username}`);
             safeSetHref("ios-shadowrocket-add", `sub://${encodedFullUrlBase64}`);
             safeSetHref("ios-foxray-add", `foxray://yiguo.dev/sub/add/?url=${encodedFullUrlBase64}#${username}`);
 
             // Android
-            safeSetHref("android-v2rayng-add", `v2rayng://install-sub?url=${encodedFullUrlComponent}&name=${username}`); // Добавил имя пользователя
-            safeSetHref("android-nekobox-add", `nekobox://install-sub?url=${encodedFullUrlComponent}&name=${username}`); // Добавил имя пользователя
+            safeSetHref("android-v2rayng-add", `v2rayng://install-sub?url=${encodedFullUrlComponent}&name=${username}`);
+            safeSetHref("android-nekobox-add", `nekobox://install-sub?url=${encodedFullUrlComponent}&name=${username}`);
             safeSetHref("android-singbox-add", `sing-box://import-remote-profile?url=${encodedFullUrlComponent}#${username}`);
 
             // Windows
-            // === ДОБАВЛЕНА ССЫЛКА ДЛЯ HIDDIFY ===
-            safeSetHref("windows-hiddify-add", `hiddify://import/${fullUrl}`); // Используем raw URL для Hiddify
+            safeSetHref("windows-hiddify-add", `hiddify://import/${fullUrl}`);
             safeSetHref("windows-clashverge-add", `clash://install-config?url=${encodedFullUrlComponent}`);
-            // Для v2rayN и NekoRay кнопки копирования обрабатываются через onclick="copyToClipboard(fullUrl, this)"
+            // Для v2rayN и NekoRay кнопки копирования обрабатываются через onclick="copyToClipboard(fullUrl, this)" в HTML
 
-            // macOS
-            safeSetHref("macos-clashverge-add", `clash://install-config?url=${encodedFullUrlComponent}`);
-            // === ДОБАВЛЕНА ССЫЛКА ДЛЯ HIDDIFY macOS ===
-            safeSetHref("macos-hiddify-add", `hiddify://import/${fullUrl}`);
-            // Для NekoRay и Sing-Box GUI кнопки копирования обрабатываются через onclick
+            // ---- ИЗМЕНЕНИЕ 1: Удалили JS код для macOS ----
+            // safeSetHref("macos-clashverge-add", `clash://install-config?url=${encodedFullUrlComponent}`);
+            // safeSetHref("macos-hiddify-add", `hiddify://import/${fullUrl}`);
+            // Для NekoRay и Sing-Box GUI кнопки копирования обрабатывались через onclick, их HTML удален
 
         } catch (error) {
             console.error("Ошибка при кодировании URL или установке ссылок:", error);
-            // Можно оповестить пользователя или отключить кнопки
             alert("Не удалось сформировать ссылки для добавления подписки.");
         }
     }
@@ -435,7 +405,9 @@
         if (element) {
             element.href = url;
         } else {
-            console.warn(`Элемент с ID "${elementId}" не найден.`);
+            // Теперь это ожидаемо для удаленных элементов macOS, поэтому меняем на console.log или убираем вовсе
+            // console.warn(`Элемент с ID "${elementId}" не найден.`);
+            // console.log(`Элемент с ID "${elementId}" не найден (возможно, удален, например, для macOS).`);
         }
     }
 
@@ -493,15 +465,12 @@
 
             if (dataLimitBytes > 0) {
                 const formattedLimit = formatBytes(dataLimitBytes);
-                // Исправлена потенциальная ошибка деления на ноль или некорректных данных
                 if (dataLimitBytes > 0 && dataUsedBytes >= 0) {
                     usagePercent = Math.min(100, Math.max(0, Math.round((dataUsedBytes / dataLimitBytes) * 100)));
                 } else {
-                    usagePercent = 0; // Если лимит 0 или использовано < 0, считаем 0%
+                    usagePercent = 0;
                 }
-
-
-                if (isNaN(usagePercent)) usagePercent = 0; // Защита от NaN
+                if (isNaN(usagePercent)) usagePercent = 0;
 
                 if (usagePercent >= 80) {
                     barClass = 'bg-danger';
@@ -526,7 +495,7 @@
 
     function generateQrCode() {
         const qrCodeElement = document.getElementById('qrcode');
-        if (!qrCodeElement) return; // Проверка наличия элемента
+        if (!qrCodeElement) return;
         qrCodeElement.innerHTML = '';
         try {
             if (typeof QRCode === 'undefined') {
@@ -550,7 +519,6 @@
 
     // ----- Выполнение при загрузке DOM -----
     document.addEventListener('DOMContentLoaded', () => {
-        // Обновляем значение в поле ввода для копирования СРАЗУ
         const subLinkInput = document.getElementById('subLinkInput');
         if (subLinkInput) {
             subLinkInput.value = fullUrl;
@@ -563,40 +531,32 @@
         try {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             let targetAccordionId = null;
-            // Более точное определение ОС
             if (/android/i.test(userAgent)) {
                 targetAccordionId = "#collapseAndroid";
             } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
                 targetAccordionId = "#collapseIos";
-            } else if (/Win/.test(navigator.platform)) { // Проверка через navigator.platform для Windows
+            } else if (/Win/.test(navigator.platform)) {
                 targetAccordionId = "#collapseWindows";
-            } else if (/Mac/.test(navigator.platform)) { // Проверка через navigator.platform для macOS
-                targetAccordionId = "#collapseMacOs";
-            } else if (/Linux/.test(navigator.platform) && !/android/i.test(userAgent)) { // Добавим Linux (откроем Windows как запасной вариант)
-                targetAccordionId = "#collapseWindows"; // Или можно создать отдельную секцию Linux
+            } else if (/Mac/.test(navigator.platform)) {
+                targetAccordionId = "#collapseMacOs"; // Оставляем открытие секции macOS, даже если она пустая
+            } else if (/Linux/.test(navigator.platform) && !/android/i.test(userAgent)) {
+                targetAccordionId = "#collapseWindows"; // Запасной вариант для Linux
             }
 
 
             if (targetAccordionId) {
                 const targetCollapseElement = document.querySelector(targetAccordionId);
-                // Убедимся, что Bootstrap и элемент существуют
                 if (targetCollapseElement && typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
-                    // Проверяем, не был ли уже открыт какой-то элемент (например, через URL hash)
                     const currentlyShown = document.querySelector('.accordion-collapse.show');
                     if (!currentlyShown) {
-                        const bsCollapse = bootstrap.Collapse.getOrCreateInstance(targetCollapseElement, {
-                            toggle: false // Не переключать, если уже открыт
-                        });
-                        setTimeout(() => bsCollapse.show(), 150); // Небольшая задержка для плавной анимации
+                        const bsCollapse = bootstrap.Collapse.getOrCreateInstance(targetCollapseElement, { toggle: false });
+                        setTimeout(() => bsCollapse.show(), 150);
                     } else if (currentlyShown !== targetCollapseElement) {
-                        // Если открыт другой, можно его закрыть и открыть нужный
                         const currentBsCollapse = bootstrap.Collapse.getInstance(currentlyShown);
                         if (currentBsCollapse) currentBsCollapse.hide();
                         const targetBsCollapse = bootstrap.Collapse.getOrCreateInstance(targetCollapseElement, { toggle: false });
-                        setTimeout(() => targetBsCollapse.show(), 150); // Даем время закрыться предыдущему
+                        setTimeout(() => targetBsCollapse.show(), 150);
                     }
-                    // Если нужный элемент уже открыт (currentlyShown === targetCollapseElement), ничего не делаем
-
                 } else if (!targetCollapseElement) {
                     console.warn(`Элемент аккордеона ${targetAccordionId} не найден.`);
                 } else if (typeof bootstrap === 'undefined' || !bootstrap.Collapse) {
@@ -606,7 +566,6 @@
         } catch (e) {
             console.error("Ошибка при открытии аккордеона:", e);
         }
-
 
         // Инициализация QR-кода при показе модального окна
         const qrModalElement = document.getElementById('qrModal');
